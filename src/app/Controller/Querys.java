@@ -184,15 +184,18 @@ public class Querys {
         Conexao.Exibir(5, hcliente.getClass(), url, usuario, senha);
 
         System.out.println("Id do cliente");
-        int id = entrada.nextInt();
+        int idCliente = entrada.nextInt();
+
+        System.out.println("Id do produto");
+        int idProduto = entrada.nextInt();
 
         Statement sqlmgr = null;
         Connection conn2 = DriverManager.getConnection(url, usuario, senha);
         sqlmgr = conn2.createStatement();
 
-        String sql_delete_cliente = "DELETE FROM produtos WHERE id = " + id;
+        String sql_delete_cliente = "DELETE FROM produtos WHERE id = " + idProduto;
         sqlmgr.executeUpdate(sql_delete_cliente);
-        String sql_delete_produto = "DELETE FROM clientes WHERE id = " + id;
+        String sql_delete_produto = "DELETE FROM clientes WHERE id = " + idCliente;
         sqlmgr.executeUpdate(sql_delete_produto);
 
         HMenus.LimparConsole();
@@ -245,7 +248,6 @@ public class Querys {
                 System.out.println("Nome do Produto: " + nomeProduto);
                 System.out.println("Preço: R$" + preco);
                 System.out.println("\r");
-
             }
 
             conn.close();
