@@ -24,7 +24,7 @@ public class App {
         int opcao = scan.nextInt();
 
         if (opcao == 1) {
-            Menus.MenuAcoes();
+            Menus.MenuCliente();
             int crudCliente = scan.nextInt();
             if (crudCliente == 1) {
                 main(arg);
@@ -41,7 +41,7 @@ public class App {
             }
         }
         if (opcao == 2) {
-            Menus.MenuAcoes();
+            Menus.MenuProduto();
             int crudProduto = scan.nextInt();
             if (crudProduto == 1) {
                 main(arg);
@@ -52,7 +52,6 @@ public class App {
 		        comandos.DeletarProduto(url, usuario, senha);
             } else if (crudProduto == 5) {
                 Conexao.Exibir(crudProduto, hproduto.getClass(), url, usuario, senha);
-                HProduto.ValorTotalCompras();
             } else {
                 System.out.println("Essa opção não existe!");
             }
