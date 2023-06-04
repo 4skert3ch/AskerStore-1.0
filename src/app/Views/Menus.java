@@ -11,7 +11,7 @@ public class Menus {
         hmenus.LimparConsole();
         System.out.println("\r ===================** CrudAsk **==================== \r\n");
 
-        String[] options = { "Clientes", "Produto" };
+        String[] options = { "Clientes", "Produto", };
 
         int i = 0;
         for (String item : options) {

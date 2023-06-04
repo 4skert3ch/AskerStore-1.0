@@ -18,15 +18,12 @@ public class App {
         HCliente hcliente = new HCliente();
         HProduto hproduto = new HProduto();
 
-        Menus menu = new Menus();
-        Conexao conn = new Conexao();
-
-        conn.main(arg);
+        Conexao.main(arg);
         Scanner scan = new Scanner(System.in);
         int opcao = scan.nextInt();
 
         if (opcao == 1) {
-            menu.MenuAcoes();
+            Menus.MenuAcoes();
             int crudCliente = scan.nextInt();
             if (crudCliente == 1) {
                 main(arg);
@@ -36,13 +33,14 @@ public class App {
             } else if (crudCliente == 4) {
 		       comandos.DeletarCliente(url, usuario, senha);
             } else if (crudCliente == 5) {
-                conn.Exibir(crudCliente, hcliente.getClass(), url, usuario, senha);
+                Conexao.Exibir(crudCliente, hcliente.getClass(), url, usuario, senha);
+                HProduto.ValorTotalCompras();
             } else {
                 System.out.println("Essa opção não existe!");
             }
         }
         if (opcao == 2) {
-            menu.MenuAcoes();
+            Menus.MenuAcoes();
             int crudProduto = scan.nextInt();
             if (crudProduto == 1) {
                 main(arg);
@@ -52,7 +50,8 @@ public class App {
             } else if (crudProduto == 4) {
 		        comandos.DeletarProduto(url, usuario, senha);
             } else if (crudProduto == 5) {
-                conn.Exibir(crudProduto, hproduto.getClass(), url, usuario, senha);
+                Conexao.Exibir(crudProduto, hproduto.getClass(), url, usuario, senha);
+                HProduto.ValorTotalCompras();
             } else {
                 System.out.println("Essa opção não existe!");
             }

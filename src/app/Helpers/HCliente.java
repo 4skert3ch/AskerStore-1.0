@@ -1,8 +1,10 @@
 package app.Helpers;
 import java.util.ArrayList;
 
+import app.App;
+
 public class HCliente {
-    public static void printaSelect(ArrayList<String> select) {
+    public static void printaSelect(ArrayList<String> select) throws Exception {
         int tamanho = ((select.size()) / 7);
         System.out.println("======================");
         for (int i = 0; i < tamanho; i++) {
