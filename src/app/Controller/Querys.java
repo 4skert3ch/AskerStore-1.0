@@ -1,4 +1,4 @@
-package app.Database;
+package app.Controller;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import app.App;
-import app.Database.Connection.Conexao;
+import app.Controller.Connection.Conexao;
 import app.Helpers.HCliente;
 import app.Helpers.HMenus;
 

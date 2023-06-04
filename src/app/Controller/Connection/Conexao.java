@@ -1,4 +1,4 @@
-package app.Database.Connection;
+package app.Controller.Connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import app.Views.Menus;
-import app.Database.Querys;
+import app.Controller.Querys;
 import app.Helpers.HCliente;
 import app.Helpers.HMenus;
 import app.Helpers.HProduto;

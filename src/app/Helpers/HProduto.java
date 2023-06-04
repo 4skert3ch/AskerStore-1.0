@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import app.App;
-import app.Database.Querys;
+import app.Controller.Querys;
 
 public class HProduto {
     
