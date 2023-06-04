@@ -34,7 +34,7 @@ public class Querys {
         stmt.executeUpdate(sql);
 
         sql = "create table produtos (" +
-                "id_produto int primary key auto_increment," +
+                "id int primary key auto_increment," +
                 "id_cliente int not null," +
                 "nome varchar(50) not null," +
                 "preco decimal(10, 2) not null default 0," +
@@ -133,11 +133,11 @@ public class Querys {
 
     }
 
-    public ArrayList<String> Consultas(Connection conn) throws SQLException {
+    public ArrayList<String> ConsultarCliente(Connection conn) throws SQLException {
         ArrayList<String> cliente = new ArrayList<String>();
         try {
             PreparedStatement pstm = conn.prepareStatement(
-                    "select id, nome, email, cpf, telefone, endereco, datadeNascimento from clientes");
+                    "select id, nome, email, cpf, telefone, endereco, datadeNascimento from clientes;");
             ResultSet rs = null;
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -148,6 +148,26 @@ public class Querys {
                 cliente.add(rs.getString("telefone"));
                 cliente.add(rs.getString("endereco"));
                 cliente.add(rs.getString("datadeNascimento"));
+            }
+        } catch (Exception e) {
+            System.out.println(e + "| erro select cliente");
+        }
+
+        return cliente;
+    }
+
+    public ArrayList<String> ConsultarProdutos(Connection conn) throws SQLException {
+        ArrayList<String> cliente = new ArrayList<String>();
+        try {
+            PreparedStatement pstm = conn.prepareStatement(
+                    "select id, id_cliente , nome, preco from produtos;");
+            ResultSet rs = null;
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                cliente.add(rs.getString("id"));
+                cliente.add(rs.getString("id_cliente"));
+                cliente.add(rs.getString("nome"));
+                cliente.add(rs.getString("preco"));
             }
         } catch (Exception e) {
             System.out.println(e + "| erro select cliente");
@@ -170,7 +190,7 @@ public class Querys {
         Connection conn2 = DriverManager.getConnection(url, usuario, senha);
         sqlmgr = conn2.createStatement();
 
-        String sql_delete_cliente = "DELETE FROM produtos WHERE id_produto = " + id;
+        String sql_delete_cliente = "DELETE FROM produtos WHERE id = " + id;
         sqlmgr.executeUpdate(sql_delete_cliente);
         String sql_delete_produto = "DELETE FROM clientes WHERE id = " + id;
         sqlmgr.executeUpdate(sql_delete_produto);
@@ -194,7 +214,7 @@ public class Querys {
         Connection conn2 = DriverManager.getConnection(url, usuario, senha);
         sqlmgr = conn2.createStatement();
 
-        String sql_delete_cliente = "DELETE FROM produtos WHERE id_produto = " + id;
+        String sql_delete_cliente = "DELETE FROM produtos WHERE id = " + id;
         sqlmgr.executeUpdate(sql_delete_cliente);
 
         HMenus.LimparConsole();

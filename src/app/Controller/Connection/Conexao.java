@@ -56,8 +56,8 @@ public class Conexao {
         
         conexao = DriverManager.getConnection(url, usuario, senha);
 
-        ArrayList<String> cliente = _querys.Consultas(conexao);
-        ArrayList<String> produto = _querys.Consultas(conexao);
+        ArrayList<String> cliente = _querys.ConsultarCliente(conexao);
+        ArrayList<String> produto = _querys.ConsultarProdutos(conexao);
 
         HCliente hcliente = new HCliente();
         HProduto hproduto = new HProduto();
