@@ -52,7 +52,7 @@ public class Conexao {
         }
     }
 
-    public static void Exibir(int opcao, Class classe, String url, String usuario, String senha) throws SQLException {
+    public static void Exibir(int opcao, Class classe, String url, String usuario, String senha) throws Exception {
         
         conexao = DriverManager.getConnection(url, usuario, senha);
 
@@ -63,38 +63,28 @@ public class Conexao {
         HProduto hproduto = new HProduto();
 
         if (opcao == 5 && classe == hcliente.getClass()) {
-            hcliente.printaSelect(cliente);
-            for (int i = 0; i < cliente.size(); i++) {
-                System.out.println(cliente.get(i));
-            }
+            HCliente.printaSelect(cliente);
         }
-
         if (opcao == 5 && classe == hproduto.getClass()) {
-            hproduto.printaSelect(produto);
-            for (int i = 0; i < cliente.size(); i++) {
-                System.out.println(cliente.get(i));
-            }
+            HProduto.printaSelect(produto);
         }
     }
 
     public static Statement StatementsQuerys(Connection conn) throws SQLException, InterruptedException {
-        Querys _querys = new Querys();
-        HMenus hmenus = new HMenus();
-        Menus menu = new Menus();
         Statement stmt = conn.createStatement();
         try {
             int max = 22;
-            _querys.CriarTabelas(conn);
+            Querys.CriarTabelas(conn);
             System.out.println("Criando tabelas do sistema...");
             for (int i = 0; i <= max; i++) {
                 Thread.sleep(100);
-                System.out.print(String.format("\r%s", hmenus.progressBar(i, max)));
+                System.out.print(String.format("\r%s", HMenus.progressBar(i, max)));
             }
-            menu.MenuPrincipal();
+            Menus.MenuPrincipal();
             System.out.println("\nSucesso tabelas criadas");
         } catch (SQLSyntaxErrorException e) {
             System.out.println(" - Tabelas [OK]");
-            menu.MenuPrincipal();
+            Menus.MenuPrincipal();
         }
         return stmt;
     }

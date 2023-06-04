@@ -18,11 +18,12 @@ import app.Helpers.HMenus;
 public class Querys {
     HMenus hmenus = new HMenus();
     App app = new App();
+
     public static Statement CriarTabelas(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
         String sql;
-    
-            sql = "create table clientes(" +
+
+        sql = "create table clientes(" +
                 "id int primary key auto_increment," +
                 "nome varchar(25) not null," +
                 "email varchar(35)," +
@@ -30,15 +31,15 @@ public class Querys {
                 "telefone varchar(20)," +
                 "endereco varchar(20)," +
                 "DataDeNascimento date);";
-            stmt.executeUpdate(sql);
+        stmt.executeUpdate(sql);
 
-            sql = "create table produtos (" +
-                 "id_produto int primary key auto_increment," +
-                 "id_cliente int not null," +
-                 "nome varchar(50) not null," +
-                 "preco decimal(10, 2) not null default 0," +
-                 "foreign key (id_cliente) references clientes(id));";
-            stmt.executeUpdate(sql);
+        sql = "create table produtos (" +
+                "id_produto int primary key auto_increment," +
+                "id_cliente int not null," +
+                "nome varchar(50) not null," +
+                "preco decimal(10, 2) not null default 0," +
+                "foreign key (id_cliente) references clientes(id));";
+        stmt.executeUpdate(sql);
 
         return stmt;
     }
@@ -54,40 +55,40 @@ public class Querys {
         Date DataDeNascimento;
 
         try {
-            Scanner scan2 = new Scanner(System.in);
+            Scanner scan = new Scanner(System.in);
             Connection conn = DriverManager.getConnection(url, usuario, senha);
+            
             PreparedStatement stmt = conn.prepareStatement(sql_insert_clientes);
-
             System.out.println("Caso não queira inserir um valor, digite null.");
             System.out.println("Qual o nome do cliente? (obrigatório; máximo: 25 caracteres)");
-            nome = scan2.nextLine();
+            nome = scan.nextLine();
             stmt.setString(1, nome);
 
             System.out.println("Qual o email do cliente? (máximo: 35 caracteres)");
-            email = scan2.nextLine();
+            email = scan.nextLine();
             stmt.setString(2, email);
 
             System.out.println("Qual o cpf do cliente? (máximo: 11 caracteres)");
-            cpf = scan2.nextLine();
+            cpf = scan.nextLine();
             stmt.setString(3, cpf);
 
             System.out.println("Qual o telefone do cliente? (máximo: 20 caracteres)");
-            telefone = scan2.nextLine();
+            telefone = scan.nextLine();
             stmt.setString(4, telefone);
 
             System.out.println("Qual o endereço do cliente? (máximo: 20 caracteres)");
-            endereco = scan2.nextLine();
+            endereco = scan.nextLine();
             stmt.setString(5, endereco);
 
             System.out.println("Qual a data de nascimento do cliente?\nFormato: ano-mês-dia\nUse números!");
-            DataDeNascimento = Date.valueOf(scan2.nextLine());
+            DataDeNascimento = Date.valueOf(scan.nextLine());
             stmt.setDate(6, DataDeNascimento);
 
             stmt.executeUpdate();
             conn.close();
 
-            hmenus.LimparConsole();
-            app.main(null);
+            HMenus.LimparConsole();
+            App.main(null);
 
         } catch (Exception e) {
             System.out.println("INSERIDO COM SUCESSO !");
@@ -118,18 +119,18 @@ public class Querys {
             preco = scan.nextDouble();
             stmt.setDouble(3, preco);
 
-            hmenus.LimparConsole();
+            HMenus.LimparConsole();
 
             stmt.executeUpdate();
             conn.close();
 
-            hmenus.LimparConsole();
-            app.main(null);
+            HMenus.LimparConsole();
+            App.main(null);
 
         } catch (Exception e) {
             System.out.println("INSERIDO COM SUCESSO !");
         }
-       
+
     }
 
     public ArrayList<String> Consultas(Connection conn) throws SQLException {
@@ -155,42 +156,36 @@ public class Querys {
         return cliente;
     }
 
+    public void DeletarCliente(String url, String usuario, String senha) throws Exception {
 
-    public void DeletarCliente(String url, String usuario, String senha) throws Exception{
-
-        App app = new App();
-        HMenus hmenus = new HMenus();
 
         Scanner entrada = new Scanner(System.in);
         HCliente hcliente = new HCliente();
-        Conexao conn = new Conexao();
-        conn.Exibir(5, hcliente.getClass(), url, usuario, senha);
-        
-        
+        Conexao.Exibir(5, hcliente.getClass(), url, usuario, senha);
+
         System.out.println("Id do cliente");
         int id = entrada.nextInt();
-        
+
         Statement sqlmgr = null;
         Connection conn2 = DriverManager.getConnection(url, usuario, senha);
         sqlmgr = conn2.createStatement();
-        
+
         String sql_delete_cliente = "DELETE FROM produtos WHERE id_produto = " + id;
         sqlmgr.executeUpdate(sql_delete_cliente);
         String sql_delete_produto = "DELETE FROM clientes WHERE id = " + id;
         sqlmgr.executeUpdate(sql_delete_produto);
 
-        hmenus.LimparConsole();
-        app.main(null);
+        HMenus.LimparConsole();
+        App.main(null);
 
     }
 
-    public void DeletarProduto(String url, String usuario, String senha) throws Exception{
+    public void DeletarProduto(String url, String usuario, String senha) throws Exception {
 
         Scanner entrada = new Scanner(System.in);
         HCliente hcliente = new HCliente();
-        Conexao conn = new Conexao();
-        conn.Exibir(5, hcliente.getClass(), url, usuario, senha);
 
+        Conexao.Exibir(5, hcliente.getClass(), url, usuario, senha);
 
         System.out.println("Id do cliente");
         int id = entrada.nextInt();
@@ -202,8 +197,70 @@ public class Querys {
         String sql_delete_cliente = "DELETE FROM produtos WHERE id_produto = " + id;
         sqlmgr.executeUpdate(sql_delete_cliente);
 
-        hmenus.LimparConsole();
-        app.main(null);
+        HMenus.LimparConsole();
+        App.main(null);
 
+    }
+
+    public static ResultSet MostrarCliente_produto(int idCliente) {
+        String url = "jdbc:mysql://localhost:3306/askerdata";
+        String usuario = "root";
+        String senha = "";
+        String sql_Produtos_cliente = "SELECT p.Nome AS NomeProduto, p.preco, c.Nome AS NomeCliente FROM produtos p " +
+                "JOIN clientes c ON c.ID = p.ID_cliente " +
+                "WHERE c.ID = ?";
+
+        try {
+            Connection conn = DriverManager.getConnection(url, usuario, senha);
+            PreparedStatement stmt = conn.prepareStatement(sql_Produtos_cliente);
+            stmt.setInt(1, idCliente);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String NomeCliente = rs.getString("NomeCliente");
+                String nomeProduto = rs.getString("NomeProduto");
+                double preco = rs.getDouble("preco");
+                System.out.println("Nome do cliente: " + NomeCliente);
+                System.out.println("Nome do Produto: " + nomeProduto);
+                System.out.println("Preço: R$" + preco);
+                System.out.println("\r");
+
+            }
+
+            conn.close();
+            return rs;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public static double ValorTotalProdutos(int idCliente) {
+        String url = "jdbc:mysql://localhost:3306/askerdata";
+        String usuario = "root";
+        String senha = "";
+        String sqlProdutosCliente = "SELECT SUM(p.preco) AS total FROM produtos p WHERE p.id_cliente = ?";
+
+        try {
+            Connection conn = DriverManager.getConnection(url, usuario, senha);
+            PreparedStatement stmt = conn.prepareStatement(sqlProdutosCliente);
+            stmt.setInt(1, idCliente);
+
+            ResultSet rs = stmt.executeQuery();
+            double total = 0.0;
+
+            if (rs.next()) {
+                total = rs.getDouble("total");
+            }
+
+            stmt.close();
+            conn.close();
+
+            return total;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0.0;
+        }
     }
 }
