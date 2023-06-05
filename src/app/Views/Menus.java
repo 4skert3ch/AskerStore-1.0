@@ -9,6 +9,7 @@ public class Menus {
     public static void MenuPrincipal() {
         HMenus hmenus = new HMenus();
         hmenus.LimparConsole();
+        System.out.println("\n - Tabelas [OK]");
         System.out.println("\r ===================** CrudAsk **==================== \r\n");
 
         String[] options = { "Clientes", "Produto", };

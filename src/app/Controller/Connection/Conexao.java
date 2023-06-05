@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import app.Views.Menus;
+import app.App;
 import app.Controller.Querys;
 import app.Helpers.HCliente;
 import app.Helpers.HMenus;
@@ -64,16 +65,24 @@ public class Conexao {
 
         if (opcao == 5 && classe == hcliente.getClass()) {
             HCliente.printaSelect(cliente);
+            if(cliente.size() == 0){
+                HMenus.LimparConsole();
+                App.main(null);
+            }
         }
         if (opcao == 5 && classe == hproduto.getClass()) {
             HProduto.printaSelect(produto);
+            if(produto.size() == 0){
+                HMenus.LimparConsole();
+                App.main(null);
+            }
         }
     }
 
     public static Statement StatementsQuerys(Connection conn) throws SQLException, InterruptedException {
         Statement stmt = conn.createStatement();
+        int max = 22;
         try {
-            int max = 22;
             Querys.CriarTabelas(conn);
             System.out.println("Criando tabelas do sistema...");
             for (int i = 0; i <= max; i++) {
@@ -83,7 +92,10 @@ public class Conexao {
             Menus.MenuPrincipal();
             System.out.println("\nSucesso tabelas criadas");
         } catch (SQLSyntaxErrorException e) {
-            System.out.println(" - Tabelas [OK]");
+            for (int i = 0; i <= max; i++) {
+                Thread.sleep(7);
+                System.out.print(String.format("\r%s", HMenus.progressBar(i, max)));
+            }
             Menus.MenuPrincipal();
         }
         return stmt;
