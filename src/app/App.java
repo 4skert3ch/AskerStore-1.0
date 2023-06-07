@@ -31,6 +31,7 @@ public class App {
             } else if (crudCliente == 2) {
                 comandos.inserirCliente(url, usuario, senha);
             } else if (crudCliente == 3) {
+                comandos.AtualizarCliente(url, usuario, senha);
             } else if (crudCliente == 4) {
 		       comandos.DeletarCliente(url, usuario, senha);
             } else if (crudCliente == 5) {
