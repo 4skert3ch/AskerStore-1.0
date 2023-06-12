@@ -11,10 +11,10 @@ import app.Views.Menus;
 public class App {
     public static void main(String[] arg) throws Exception {
 
-	String url = "jdbc:mysql://localhost:3306/askerdata";
+        String url = "jdbc:mysql://localhost:3306/askerdata";
         String usuario = "root";
         String senha = "";
-	
+
         Querys comandos = new Querys();
         HCliente hcliente = new HCliente();
         HProduto hproduto = new HProduto();
@@ -32,7 +32,7 @@ public class App {
                 comandos.inserirCliente(url, usuario, senha);
             } else if (crudCliente == 3) {
             } else if (crudCliente == 4) {
-		       comandos.DeletarCliente(url, usuario, senha);
+                comandos.DeletarCliente(url, usuario, senha);
             } else if (crudCliente == 5) {
                 Conexao.Exibir(crudCliente, hcliente.getClass(), url, usuario, senha);
                 HProduto.ValorTotalCompras();
@@ -49,7 +49,7 @@ public class App {
                 comandos.inserirProduto(url, usuario, senha);
             } else if (crudProduto == 3) {
             } else if (crudProduto == 4) {
-		        comandos.DeletarProduto(url, usuario, senha);
+                comandos.DeletarProduto(url, usuario, senha);
             } else if (crudProduto == 5) {
                 Conexao.Exibir(crudProduto, hproduto.getClass(), url, usuario, senha);
             } else {

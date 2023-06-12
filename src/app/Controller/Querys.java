@@ -160,17 +160,17 @@ public class Querys {
         ArrayList<String> cliente = new ArrayList<String>();
         try {
             PreparedStatement pstm = conn.prepareStatement(
-                    "select id, id_cliente , nome, preco from produtos;");
+                    "select id_produto, id_cliente , nome, preco from produtos;");
             ResultSet rs = null;
             rs = pstm.executeQuery();
             while (rs.next()) {
-                cliente.add(rs.getString("id"));
+                cliente.add(rs.getString("id_produto"));
                 cliente.add(rs.getString("id_cliente"));
                 cliente.add(rs.getString("nome"));
                 cliente.add(rs.getString("preco"));
             }
         } catch (Exception e) {
-            System.out.println(e + "| erro select cliente");
+            System.out.println(e + "| erro select produto");
         }
 
         return cliente;
