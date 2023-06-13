@@ -57,7 +57,7 @@ public class Querys {
         try {
             Scanner scan = new Scanner(System.in);
             Connection conn = DriverManager.getConnection(url, usuario, senha);
-            
+
             PreparedStatement stmt = conn.prepareStatement(sql_insert_clientes);
             System.out.println("Caso não queira inserir um valor, digite null.");
             System.out.println("Qual o nome do cliente? (obrigatório; máximo: 25 caracteres)");
@@ -178,7 +178,6 @@ public class Querys {
 
     public void DeletarCliente(String url, String usuario, String senha) throws Exception {
 
-
         Scanner entrada = new Scanner(System.in);
         HCliente hcliente = new HCliente();
         Conexao.Exibir(5, hcliente.getClass(), url, usuario, senha);
@@ -200,6 +199,148 @@ public class Querys {
 
         HMenus.LimparConsole();
         App.main(null);
+
+    }
+
+    public void AtualizarCliente(String url, String usuario, String senha) throws Exception {
+
+        Scanner entrada = new Scanner(System.in);
+        HCliente hcliente = new HCliente();
+        Conexao.Exibir(5, hcliente.getClass(), url, usuario, senha);
+
+        System.out.println("Id do cliente que deseja atualizar");
+        int idCliente = entrada.nextInt();
+
+        Statement sqlmgr = null;
+        Connection conn2 = DriverManager.getConnection(url, usuario, senha);
+        sqlmgr = conn2.createStatement();
+
+        int v_contador = 0;
+        String campos = "";
+
+        do {// nome, email, cpf, telefone, endereco, datadenascimento
+
+            // nome
+            System.out.println("Você deseja atualizar o nome? (1) Sim | (2) Não");
+            int opcaoNome = entrada.nextInt();
+
+            switch (opcaoNome) {
+                case 1:
+                    System.out.println("Digite o novo nome:");
+                    String nome = entrada.next();
+                    nome = "'" + nome + "'";
+                    campos = "nome = " + nome;
+                    v_contador++;
+                    break;
+                default:
+                    break;
+            }
+
+            // EMAIL
+            System.out.println("Você deseja atualizar o email? (1) Sim | (2) Não");
+            int opcaoEmail = entrada.nextInt();
+            switch (opcaoEmail) {
+                case 1:
+                    String teste = v_contador > 0 ? "," : "";
+                    campos = campos + teste;
+
+                    System.out.println("Digite o novo email:");
+                    String email = entrada.next();
+                    email = "'" + email + "'";
+                    campos = campos + "email = " + email;
+                    v_contador++;
+                    break;
+                default:
+                    break;
+            }
+
+            // CPF
+            System.out.println("Você deseja atualizar o CPF? (1) Sim | (2) Não");
+            int opcaoCPF = entrada.nextInt();
+            switch (opcaoCPF) {
+                case 1:
+                    String teste = v_contador > 0 ? "," : "";
+                    campos = campos + teste;
+
+                    System.out.println("Digite o novo CPF:");
+                    String CPF = entrada.next();
+                    CPF = "'" + CPF + "'";
+                    campos = campos + "cpf = " + CPF;
+                    v_contador++;
+                    break;
+                default:
+                    break;
+            }
+
+            // telefone
+            System.out.println("Você deseja atualizar o telefone? (1) Sim | (2) Não");
+            int opcaoTelefone = entrada.nextInt();
+            switch (opcaoTelefone) {
+                case 1:
+                    String teste = v_contador > 0 ? "," : "";
+                    campos = campos + teste;
+
+                    System.out.println("Digite o novo telefone:");
+                    String telefone = entrada.next();
+                    telefone = "'" + telefone + "'";
+                    campos = campos + "telefone = " + telefone;
+                    v_contador++;
+                    break;
+                default:
+                    break;
+            }
+
+            // ENDERECO
+            System.out.println("Você deseja atualizar o endereço? (1) Sim | (2) Não");
+            int opcaoEndereco = entrada.nextInt();
+            switch (opcaoEndereco) {
+                case 1:
+                    String teste = v_contador > 0 ? "," : "";
+                    campos = campos + teste;
+
+                    System.out.println("Digite o novo endereço:");
+                    String endereco = entrada.next();
+                    endereco = "'" + endereco + "'";
+                    campos = campos + "endereco = " + endereco;
+                    v_contador++;
+                    break;
+                default:
+                    break;
+            }
+
+            // data de nascimento
+            System.out.println("Você deseja atualizar a data de nascimento? (1) Sim | (2) Não");
+            int opcaoDatadeNascimento = entrada.nextInt();
+            switch (opcaoDatadeNascimento) {
+                case 1:
+                    String teste = v_contador > 0 ? "," : "";
+                    campos = campos + teste;
+
+                    System.out.println("Digite o novo data de nascimento: formato AAAA-MM-DD");
+                    String datadenascimento = entrada.next();
+                    datadenascimento = "'" + datadenascimento + "'";
+                    campos = campos + "DataDeNascimento = " + datadenascimento;
+                    v_contador++;
+                    break;
+                default:
+                    break;
+            }
+
+            if (v_contador == 0) {
+                System.out.println("Atualize algo por favor!");
+            }
+
+        } while (v_contador == 0);
+System.out.println("---------");
+        String sql_update_cliente = "update clientes " +
+                "set " + campos +
+                " where id = " + idCliente;
+
+        sqlmgr.executeUpdate(sql_update_cliente);
+        // HMenus.LimparConsole();
+        App.main(null);
+
+        entrada.close();
 
     }
 
