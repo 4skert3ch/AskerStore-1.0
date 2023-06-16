@@ -159,7 +159,10 @@ public class Querys {
     public ArrayList<String> ConsultarProdutos(Connection conn) throws SQLException {
         ArrayList<String> cliente = new ArrayList<String>();
         try {
-            PreparedStatement pstm = conn.prepareStatement("select id, id_cliente , nome, preco from produtos;");
+            PreparedStatement pstm = conn.prepareStatement("select pro.id, pro.id_cliente , pro.nome, pro.preco, cli.nomecli" + 
+                                                            "from produtos pro                     " +
+                                                            "inner join clientes cli on pro.id_cliente = cli.id"
+                                                          );
             ResultSet rs = null;
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -167,6 +170,7 @@ public class Querys {
                 cliente.add(rs.getString("id_cliente"));
                 cliente.add(rs.getString("nome"));
                 cliente.add(rs.getString("preco"));
+                cliente.add(rs.getString("nomecli"));
             }
         } catch (Exception e) {
             System.out.println(e + "| erro select cliente");

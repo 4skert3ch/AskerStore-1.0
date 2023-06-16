@@ -10,14 +10,12 @@ public class HProduto {
 
     public static void printaSelect(ArrayList<String> select) throws Exception {
 
-        int tamanho = ((select.size()) / 4);
+        int tamanho = ((select.size()) / 5);
         System.out.println("========================PRODUTOS===========================");
         for (int i = 0; i < tamanho; i++) {
-            if (i == 0) {
-                System.out.println(select.get(i) + " | " + select.get(i + 2));
-            } else {
-                System.out.println(select.get(i + (4 * i)) + " | " + select.get(i + (4 * i) + 1));
-            }
+            int offset = (i * 5);
+            
+            System.out.println(select.get(offset) + " | " + select.get(offset + 2) + " | " + select.get(offset + 4));      
         }
     }
 
