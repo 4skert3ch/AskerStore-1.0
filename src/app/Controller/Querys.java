@@ -152,15 +152,13 @@ public class Querys {
         } catch (Exception e) {
             System.out.println(e + "| erro select cliente");
         }
-
         return cliente;
     }
 
     public ArrayList<String> ConsultarProdutos(Connection conn) throws SQLException {
         ArrayList<String> cliente = new ArrayList<String>();
         try {
-            PreparedStatement pstm = conn.prepareStatement(
-                    "select id, id_cliente , nome, preco from produtos;");
+            PreparedStatement pstm = conn.prepareStatement("select id, id_cliente , nome, preco from produtos;");
             ResultSet rs = null;
             rs = pstm.executeQuery();
             while (rs.next()) {
