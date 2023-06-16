@@ -91,7 +91,7 @@ public class Querys {
             App.main(null);
 
         } catch (Exception e) {
-            System.out.println("INSERIDO COM SUCESSO !");
+            System.out.println(e);
         }
     }
 
@@ -128,7 +128,7 @@ public class Querys {
             App.main(null);
 
         } catch (Exception e) {
-            System.out.println("INSERIDO COM SUCESSO !");
+            System.out.println(e);
         }
 
     }

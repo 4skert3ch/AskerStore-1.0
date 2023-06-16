@@ -53,6 +53,7 @@ public class App {
 		        comandos.DeletarProduto(url, usuario, senha);
             } else if (crudProduto == 5) {
                 Conexao.Exibir(crudProduto, hproduto.getClass(), url, usuario, senha);
+                HProduto.ValorTotalCompras();
             } else {
                 System.out.println("Essa opção não existe!");
             }

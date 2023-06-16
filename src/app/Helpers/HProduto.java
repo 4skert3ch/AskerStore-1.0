@@ -14,9 +14,9 @@ public class HProduto {
         System.out.println("========================PRODUTOS===========================");
         for (int i = 0; i < tamanho; i++) {
             if (i == 0) {
-                System.out.println(select.get(i) + " | " + select.get(i + 1));
+                System.out.println(select.get(i) + " | " + select.get(i + 2));
             } else {
-                System.out.println(select.get(i + (6 * i)) + " | " + select.get(i + (6 * i) + 1));
+                System.out.println(select.get(i + (4 * i)) + " | " + select.get(i + (4 * i) + 1));
             }
         }
     }
