@@ -40,6 +40,7 @@ public class App {
             } else {
                 System.out.println("Essa opção não existe!");
             }
+        }else{main(arg);
         }
         if (opcao == 2) {
             Menus.MenuProduto();
@@ -58,6 +59,6 @@ public class App {
             } else {
                 System.out.println("Essa opção não existe!");
             }
-        }
+        }else{main(arg);}
     }
 }
