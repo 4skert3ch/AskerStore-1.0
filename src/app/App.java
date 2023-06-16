@@ -49,6 +49,7 @@ public class App {
             } else if (crudProduto == 2) {
                 comandos.inserirProduto(url, usuario, senha);
             } else if (crudProduto == 3) {
+                comandos.AtualizarProduto(url, usuario, senha);
             } else if (crudProduto == 4) {
 		        comandos.DeletarProduto(url, usuario, senha);
             } else if (crudProduto == 5) {

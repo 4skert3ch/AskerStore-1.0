@@ -14,6 +14,7 @@ import app.App;
 import app.Controller.Connection.Conexao;
 import app.Helpers.HCliente;
 import app.Helpers.HMenus;
+import app.Helpers.HProduto;
 
 public class Querys {
     HMenus hmenus = new HMenus();
@@ -345,11 +346,11 @@ public class Querys {
     public void AtualizarProduto(String url, String usuario, String senha) throws Exception {
 
         Scanner entrada = new Scanner(System.in);
-        HCliente hcliente = new HCliente();
-        Conexao.Exibir(5, hcliente.getClass(), url, usuario, senha);
+        HProduto hproduto = new HProduto();
+        Conexao.Exibir(5, hproduto.getClass(), url, usuario, senha);
 
-        System.out.println("Id do cliente que deseja atualizar");
-        int idCliente = entrada.nextInt();
+        System.out.println("Id do produto que deseja atualizar");
+        int idProduto = entrada.nextInt();
 
         Statement sqlmgr = null;
         Connection conn2 = DriverManager.getConnection(url, usuario, senha);
@@ -359,107 +360,33 @@ public class Querys {
         String campos = "";
 
         do {// nome, email, cpf, telefone, endereco, datadenascimento
-
-            // nome
+            // Nome
             System.out.println("Você deseja atualizar o nome? (1) Sim | (2) Não");
             int opcaoNome = entrada.nextInt();
-
             switch (opcaoNome) {
                 case 1:
                     System.out.println("Digite o novo nome:");
                     String nome = entrada.next();
                     nome = "'" + nome + "'";
-                    campos = "nome = " + nome;
+                    campos = campos + "nome = " + nome;
                     v_contador++;
                     break;
                 default:
                     break;
             }
 
-            // EMAIL
-            System.out.println("Você deseja atualizar o email? (1) Sim | (2) Não");
-            int opcaoEmail = entrada.nextInt();
-            switch (opcaoEmail) {
+            // Preco
+            System.out.println("Você deseja atualizar o preco? (1) Sim | (2) Não");
+            int opcaoPreco = entrada.nextInt();
+            switch (opcaoPreco) {
                 case 1:
                     String teste = v_contador > 0 ? "," : "";
                     campos = campos + teste;
 
-                    System.out.println("Digite o novo email:");
-                    String email = entrada.next();
-                    email = "'" + email + "'";
-                    campos = campos + "email = " + email;
-                    v_contador++;
-                    break;
-                default:
-                    break;
-            }
-
-            // CPF
-            System.out.println("Você deseja atualizar o CPF? (1) Sim | (2) Não");
-            int opcaoCPF = entrada.nextInt();
-            switch (opcaoCPF) {
-                case 1:
-                    String teste = v_contador > 0 ? "," : "";
-                    campos = campos + teste;
-
-                    System.out.println("Digite o novo CPF:");
-                    String CPF = entrada.next();
-                    CPF = "'" + CPF + "'";
-                    campos = campos + "cpf = " + CPF;
-                    v_contador++;
-                    break;
-                default:
-                    break;
-            }
-
-            // telefone
-            System.out.println("Você deseja atualizar o telefone? (1) Sim | (2) Não");
-            int opcaoTelefone = entrada.nextInt();
-            switch (opcaoTelefone) {
-                case 1:
-                    String teste = v_contador > 0 ? "," : "";
-                    campos = campos + teste;
-
-                    System.out.println("Digite o novo telefone:");
-                    String telefone = entrada.next();
-                    telefone = "'" + telefone + "'";
-                    campos = campos + "telefone = " + telefone;
-                    v_contador++;
-                    break;
-                default:
-                    break;
-            }
-
-            // ENDERECO
-            System.out.println("Você deseja atualizar o endereço? (1) Sim | (2) Não");
-            int opcaoEndereco = entrada.nextInt();
-            switch (opcaoEndereco) {
-                case 1:
-                    String teste = v_contador > 0 ? "," : "";
-                    campos = campos + teste;
-
-                    System.out.println("Digite o novo endereço:");
-                    String endereco = entrada.next();
-                    endereco = "'" + endereco + "'";
-                    campos = campos + "endereco = " + endereco;
-                    v_contador++;
-                    break;
-                default:
-                    break;
-            }
-
-            // data de nascimento
-            System.out.println("Você deseja atualizar a data de nascimento? (1) Sim | (2) Não");
-            int opcaoDatadeNascimento = entrada.nextInt();
-            switch (opcaoDatadeNascimento) {
-                case 1:
-                    String teste = v_contador > 0 ? "," : "";
-                    campos = campos + teste;
-
-                    System.out.println("Digite o novo data de nascimento: formato AAAA-MM-DD");
-                    String datadenascimento = entrada.next();
-                    datadenascimento = "'" + datadenascimento + "'";
-                    campos = campos + "DataDeNascimento = " + datadenascimento;
+                    System.out.println("Digite o novo preco:");
+                    String preco = entrada.next();
+                    preco = "'" + preco + "'";
+                    campos = campos + "preco = " + preco;
                     v_contador++;
                     break;
                 default:
@@ -472,11 +399,11 @@ public class Querys {
 
         } while (v_contador == 0);
         System.out.println("---------");
-        String sql_update_cliente = "update clientes " +
+        String sql_update_produto = "update produtos " +
                 "set " + campos +
-                " where id = " + idCliente;
+                " where id = " + idProduto;
 
-        sqlmgr.executeUpdate(sql_update_cliente);
+        sqlmgr.executeUpdate(sql_update_produto);
         // HMenus.LimparConsole();
         App.main(null);
 
