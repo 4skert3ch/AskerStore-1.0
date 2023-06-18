@@ -5,6 +5,7 @@ import java.util.Scanner;
 import app.Controller.Querys;
 import app.Controller.Connection.Conexao;
 import app.Helpers.HCliente;
+import app.Helpers.HMenus;
 import app.Helpers.HProduto;
 import app.Views.Menus;
 
@@ -60,6 +61,10 @@ public class App {
             } else {
                 System.out.println("Essa opção não existe!");
             }
+        } 
+        else {
+            HMenus.LimparConsole();
+            App.main(null);
         }
     }
 }
