@@ -36,7 +36,9 @@ public class App {
 		       comandos.DeletarCliente(url, usuario, senha);
             } else if (crudCliente == 5) {
                 Conexao.Exibir(crudCliente, hcliente.getClass(), url, usuario, senha);
-                HProduto.ValorTotalCompras();
+                // HProduto.ValorTotalCompras();
+                HCliente.ClienteExibir();
+
             } else {
                 System.out.println("Essa opção não existe!");
             }

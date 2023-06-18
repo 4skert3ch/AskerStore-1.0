@@ -493,4 +493,44 @@ public class Querys {
             return 0.0;
         }
     }
+    public static void exibirInformacoesCliente(int idCliente ) {
+    String url = "jdbc:mysql://localhost:3306/askerdata";
+    String usuario = "root";
+    String senha = "";
+    String sqlInformacoesCliente = "SELECT nome, email, cpf, telefone, endereco, DataDeNascimento FROM clientes WHERE id = ?";
+
+    try {
+        Connection conn = DriverManager.getConnection(url, usuario, senha);
+        PreparedStatement stmt = conn.prepareStatement(sqlInformacoesCliente);
+        stmt.setInt(1, idCliente);
+
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            String nome = rs.getString("nome");
+            String email = rs.getString("email");
+            String cpf = rs.getString("cpf");
+            String telefone = rs.getString("telefone");
+            String endereco = rs.getString("endereco");
+            Date dataNascimento = rs.getDate("DataDeNascimento");
+            
+            System.out.println("\nInformações do Cliente:\n");
+            System.out.println("Nome: " + nome);
+            System.out.println("Email: " + email);
+            System.out.println("CPF: " + cpf);
+            System.out.println("Telefone: " + telefone);
+            System.out.println("Endereço: " + endereco);
+            System.out.println("Data de Nascimento: " + dataNascimento);
+}            else {
+            System.out.println("Cliente não encontrado.");
+}
+
+        stmt.close();
+        conn.close();
+    } catch (SQLException e) {
+        System.out.println(e);
+    }
+}
+
+
 }
