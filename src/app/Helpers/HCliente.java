@@ -22,6 +22,10 @@ public class HCliente {
     public static void ClienteExibir() throws Exception  {
         Scanner leitor = new Scanner(System.in);
 
+        String url = "jdbc:mysql://localhost:3306/askerdata";
+        String usuario = "root";
+        String senha = "";  
+
         for (;;) {
         System.out.println("Insira o id do cliente para mostrar suas informações ou digite 0 para voltar: ");
         int idCliente = leitor.nextInt();
@@ -31,7 +35,7 @@ public class HCliente {
                 App.main(null);
             }
             else {
-                 Querys.exibirInformacoesCliente(idCliente);
+                 Querys.exibirInformacoesCliente(idCliente, url, usuario, senha);
         }
     }
 }

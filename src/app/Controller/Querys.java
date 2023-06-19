@@ -433,10 +433,7 @@ public class Querys {
 
     }
 
-    public static ResultSet MostrarCliente_produto(int idCliente) {
-        String url = "jdbc:mysql://localhost:3306/askerdata";
-        String usuario = "root";
-        String senha = "";
+    public static ResultSet MostrarCliente_produto(int idCliente, String url, String usuario, String senha) {
         String sql_Produtos_cliente = "SELECT p.Nome AS NomeProduto, p.preco, c.Nome AS NomeCliente FROM produtos p " +
                 "JOIN clientes c ON c.ID = p.ID_cliente " +
                 "WHERE c.ID = ?";
@@ -466,10 +463,7 @@ public class Querys {
         }
     }
 
-    public static double ValorTotalProdutos(int idCliente) {
-        String url = "jdbc:mysql://localhost:3306/askerdata";
-        String usuario = "root";
-        String senha = "";
+    public static double ValorTotalProdutos(int idCliente, String url, String usuario, String senha) {
         String sqlProdutosCliente = "SELECT SUM(p.preco) AS total FROM produtos p WHERE p.id_cliente = ?";
 
         try {
@@ -493,10 +487,7 @@ public class Querys {
             return 0.0;
         }
     }
-    public static void exibirInformacoesCliente(int idCliente ) {
-    String url = "jdbc:mysql://localhost:3306/askerdata";
-    String usuario = "root";
-    String senha = "";
+    public static void exibirInformacoesCliente(int idCliente, String url, String usuario, String senha) {
     String sqlInformacoesCliente = "SELECT nome, email, cpf, telefone, endereco, DataDeNascimento FROM clientes WHERE id = ?";
 
     try {
