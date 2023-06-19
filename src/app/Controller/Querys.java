@@ -201,6 +201,28 @@ public class Querys {
 
     }
 
+    public void DeletarProduto(String url, String usuario, String senha) throws Exception {
+
+        Scanner entrada = new Scanner(System.in);
+        HProduto hproduto = new HProduto();
+
+        Conexao.Exibir(5, hproduto.getClass(), url, usuario, senha);
+
+        System.out.println("Id do produto");
+        int id = entrada.nextInt();
+
+        Statement sqlmgr = null;
+        Connection conn2 = DriverManager.getConnection(url, usuario, senha);
+        sqlmgr = conn2.createStatement();
+
+        String sql_delete_cliente = "DELETE FROM produtos WHERE id = " + id;
+        sqlmgr.executeUpdate(sql_delete_cliente);
+
+        HMenus.LimparConsole();
+        App.main(null);
+
+    }
+
     public void AtualizarCliente(String url, String usuario, String senha) throws Exception {
 
         Scanner entrada = new Scanner(System.in);
@@ -408,28 +430,6 @@ public class Querys {
         App.main(null);
 
         entrada.close();
-
-    }
-
-    public void DeletarProduto(String url, String usuario, String senha) throws Exception {
-
-        Scanner entrada = new Scanner(System.in);
-        HCliente hcliente = new HCliente();
-
-        Conexao.Exibir(5, hcliente.getClass(), url, usuario, senha);
-
-        System.out.println("Id do cliente");
-        int id = entrada.nextInt();
-
-        Statement sqlmgr = null;
-        Connection conn2 = DriverManager.getConnection(url, usuario, senha);
-        sqlmgr = conn2.createStatement();
-
-        String sql_delete_cliente = "DELETE FROM produtos WHERE id = " + id;
-        sqlmgr.executeUpdate(sql_delete_cliente);
-
-        HMenus.LimparConsole();
-        App.main(null);
 
     }
 
