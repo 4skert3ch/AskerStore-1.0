@@ -244,11 +244,10 @@ public class Querys {
             // nome
             System.out.println("Você deseja atualizar o nome? (1) Sim | (2) Não");
             int opcaoNome = entrada.nextInt();
-
             switch (opcaoNome) {
                 case 1:
                     System.out.println("Digite o novo nome:");
-                    String nome = entrada.next();
+                    String nome = entrada.nextLine();
                     nome = "'" + nome + "'";
                     campos = "nome = " + nome;
                     v_contador++;
