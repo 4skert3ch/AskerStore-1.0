@@ -36,6 +36,7 @@ public class HProduto {
                 HMenus.LimparConsole();
                 App.main(null);
             }
+            Querys.MostrarCliente_produto(idCliente, senha, senha, senha);
             double valorTotal = Querys.ValorTotalProdutos(idCliente, url, usuario, senha);
             System.out.println("Valor total dos produtos: R$" + valorTotal + "\n");
         }
