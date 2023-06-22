@@ -60,4 +60,7 @@ public class Menus {
             i++;
         }
     }
+
+    public static void LimparConsole() {
+    }
 }

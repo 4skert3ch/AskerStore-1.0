@@ -15,6 +15,7 @@ import app.Controller.Connection.Conexao;
 import app.Helpers.HCliente;
 import app.Helpers.HMenus;
 import app.Helpers.HProduto;
+import app.Views.Menus;
 
 public class Querys {
     HMenus hmenus = new HMenus();
@@ -175,30 +176,40 @@ public class Querys {
         return cliente;
     }
 
+    /**
+     * @param url
+     * @param usuario
+     * @param senha
+     * @throws Exception
+     */
     public void DeletarCliente(String url, String usuario, String senha) throws Exception {
 
         Scanner entrada = new Scanner(System.in);
         HCliente hcliente = new HCliente();
         Conexao.Exibir(5, hcliente.getClass(), url, usuario, senha);
 
-        System.out.println("Id do cliente");
-        int idCliente = entrada.nextInt();
+        try{
+            System.out.println("Id do cliente");
+            int idCliente = entrada.nextInt();
 
-        System.out.println("Id do produto");
-        int idProduto = entrada.nextInt();
+            System.out.println("Id do produto");
+            int idProduto = entrada.nextInt();
 
-        Statement sqlmgr = null;
-        Connection conn2 = DriverManager.getConnection(url, usuario, senha);
-        sqlmgr = conn2.createStatement();
+            Statement sqlmgr = null;
+            Connection conn2 = DriverManager.getConnection(url, usuario, senha);
+            sqlmgr = conn2.createStatement();
 
-        String sql_delete_cliente = "DELETE FROM produtos WHERE id = " + idProduto;
-        sqlmgr.executeUpdate(sql_delete_cliente);
-        String sql_delete_produto = "DELETE FROM clientes WHERE id = " + idCliente;
-        sqlmgr.executeUpdate(sql_delete_produto);
+            String sql_delete_cliente = "DELETE FROM produtos WHERE id = " + idProduto;
+            sqlmgr.executeUpdate(sql_delete_cliente);
+            String sql_delete_produto = "DELETE FROM clientes WHERE id = " + idCliente;
+            sqlmgr.executeUpdate(sql_delete_produto);
 
-        HMenus.LimparConsole();
-        App.main(null);
-
+            HMenus.LimparConsole();
+            App.main(null);
+        }catch (Exception e){
+            Menus.LimparConsole();
+            App.main(null);    
+        }
     }
 
     public void DeletarProduto(String url, String usuario, String senha) throws Exception {
