@@ -432,7 +432,10 @@ public class Querys {
 
     }
 
-    public static ResultSet MostrarCliente_produto(int idCliente, String url, String usuario, String senha) {
+    public static ResultSet MostrarCliente_produto(int idCliente) {
+        String url = "jdbc:mysql://localhost:3306/askerdata";
+        String usuario = "root";
+        String senha = "";
         String sql_Produtos_cliente = "SELECT p.Nome AS NomeProduto, p.preco, c.Nome AS NomeCliente FROM produtos p " +
                 "JOIN clientes c ON c.ID = p.ID_cliente " +
                 "WHERE c.ID = ?";
