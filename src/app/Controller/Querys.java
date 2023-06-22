@@ -247,7 +247,7 @@ public class Querys {
             switch (opcaoNome) {
                 case 1:
                     System.out.println("Digite o novo nome:");
-                    String nome = entrada.nextLine();
+                    String nome = entrada.next();
                     nome = "'" + nome + "'";
                     campos = "nome = " + nome;
                     v_contador++;
